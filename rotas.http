@@ -1,15 +1,17 @@
 GET http://localhost:8080/all-filmes
 
 ###
+
 POST http://localhost:8080/create-list
 Content-Type: application/json
 
 {
-    "titulo": "Velozes e Furiosos",
-    "genero": "Ação",
-    "duracao": "1 Hora e 46 minutos",
+    "titulo": "As Branquelas",
+    "genero": "Comédia",
+    "duracao": "1 horas 49 minutos",
     "classificacao_etaria": 14
 }
 
 ###
+
 DELETE http://localhost:8080/delete-list/1
