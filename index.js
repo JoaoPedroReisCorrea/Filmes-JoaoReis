@@ -1,4 +1,4 @@
-import express, { response } from "express"
+import express from "express"
 import mysql2 from "mysql2"
 
 const app = express()
@@ -18,7 +18,7 @@ app.get("/all-filmes", (request, response) => {
     database.query(selectCommand, (error, data) => {
         if (error) {
             console.log(error)
-            return
+            return response.status(500).json(error)
         }
 
         response.json(data)
@@ -26,34 +26,49 @@ app.get("/all-filmes", (request, response) => {
 })
 
 app.post("/create-list", (request, response) => {
-    const { description, status } = request.body
+    const {
+        titulo,
+        genero,
+        duracao,
+        classificacao_etaria
+    } = request.body
 
-    const insertCommand = "INSERT INTO filmes_JoaoReis(description, status) VALUES (?, ?)"
+    const insertCommand = `
+        INSERT INTO filmes_JoaoReis
+        (titulo, genero, duracao, classificacao_etaria)
+        VALUES (?, ?, ?, ?)
+    `
 
-    database.query(insertCommand, [description, status], (error) => {
-        if(error) {
-            console.log(error)
-        } else {
+    database.query(
+        insertCommand,
+        [titulo, genero, duracao, classificacao_etaria],
+        (error) => {
+            if (error) {
+                console.log(error)
+                return response.status(500).json(error)
+            }
+
             response.status(201).json({
                 message: "Filme inserido com sucesso!"
             })
         }
-    })
+    )
 })
 
 app.delete("/delete-list/:id", (request, response) => {
-    const { id }  = request.params
+    const { id } = request.params
 
-    const deleteCommand = "DELETE FROM filmes_JoaoReis WHERE id=?"
+    const deleteCommand = "DELETE FROM filmes_JoaoReis WHERE id = ?"
 
     database.query(deleteCommand, [id], (error) => {
-        if(error) {
+        if (error) {
             console.log(error)
-        } else {
-            response.json({
-                message: "Tarefa apagada com sucesso!"
-            })
+            return response.status(500).json(error)
         }
+
+        response.json({
+            message: "Filme apagado com sucesso!"
+        })
     })
 })
 
