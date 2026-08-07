@@ -6,10 +6,10 @@ POST http://localhost:8080/create-list
 Content-Type: application/json
 
 {
-    "titulo": "As Branquelas",
-    "genero": "Comédia",
-    "duracao": "1 horas 49 minutos",
-    "classificacao_etaria": 14
+    "titulo": "Como Treinar o seu Dragão 3",
+    "genero": "Infantil/Fantasia",
+    "duracao": "1 horas 44 minutos",
+    "classificacao_etaria": 0
 }
 
 ###
