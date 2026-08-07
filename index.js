@@ -9,37 +9,11 @@ const database = mysql2.createPool({
     host: "benserverplex.ddns.net",
     user: "alunos",
     password: "senhaAlunos",
-    database: "filmes_JoãoReis"
+    database: "alunos_filmes_03MA"
 })
 
 app.get("/all-filmes", (request, response) => {
     const selectCommand = "SELECT * FROM filmes_JoaoReis"
-
-    database.query(selectCommand, (error, data) => {
-        if (error) {
-            console.log(error)
-            return
-        }
-
-        response.json(data)
-    })
-})
-
-app.get("/active-tasks", (request, response) => {
-    const selectCommand = "SELECT * FROM filmes_JoaoReis WHERE status = 0"
-
-    database.query(selectCommand, (error, data) => {
-        if (error) {
-            console.log(error)
-            return
-        }
-
-        response.json(data)
-    })
-})
-
-app.get("/completed-tasks", (request, response) => {
-    const selectCommand = "SELECT * FROM filmes_JoaoReis WHERE status = 1"
 
     database.query(selectCommand, (error, data) => {
         if (error) {
@@ -61,7 +35,7 @@ app.post("/create-list", (request, response) => {
             console.log(error)
         } else {
             response.status(201).json({
-                message: "Tarefa criada com sucesso!"
+                message: "Filme inserido com sucesso!"
             })
         }
     })
@@ -80,35 +54,6 @@ app.delete("/delete-list/:id", (request, response) => {
                 message: "Tarefa apagada com sucesso!"
             })
         }
-    })
-})
-
-app.put("/update-task/:id", async (request, response) => {
-    const { id } = request.params
-
-    const selectTaskCommand = "SELECT * FROM filmes_JoaoReis"
-
-    const task = await database.promise().query(selectTaskCommand, [id], (error, data) => {
-        if (error) {
-            console.log(error)
-            return
-        }
-
-        return data
-    })
-
-    const updateCommand = "UPDATE filmes_JoaoReis SET status = ? WHERE id = ?"
-
-    database.query(updateCommand, [task[0][0].status ? 0 : 1, id], (error,data) => {
-        if (error) {
-            console.log(error)
-            return
-        }else {
-            response.json({
-                message: "Tarefa atualizada com sucesso!"
-            })
-        }
-        
     })
 })
 

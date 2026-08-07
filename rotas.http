@@ -5,21 +5,14 @@ POST http://localhost:8080/create-list
 Content-Type: application/json
 
 {
-    "description": "",
-    "status": 1
+    "titulo": "Velozes e Furiosos",
+    "genero": "Ação",
+    "duracao": "1 Hora e 46 minutos",
+    "classificacao_etaria": 14
 }
 
 ###
 DELETE http://localhost:8080/delete-list/1
 
 ###
-GET http://localhost:8080/all-task/
-
-###
-GET http://localhost:8080/active-tasks/
-
-###
-GET http://localhost:8080/completed-tasks/
-
-###
-PUT http://localhost:8080/update-task/1
+GET http://localhost:8080/all-filmes/
