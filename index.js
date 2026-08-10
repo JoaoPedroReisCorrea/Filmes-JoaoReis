@@ -33,11 +33,11 @@ app.post("/create-list", (request, response) => {
         classificacao_etaria
     } = request.body
 
-    const insertCommand = `
+    const insertCommand = 
         INSERT INTO filmes_JoaoReis
         (titulo, genero, duracao, classificacao_etaria)
         VALUES (?, ?, ?, ?)
-    `
+    
 
     database.query(
         insertCommand,
@@ -59,11 +59,11 @@ app.put("/edit-filme/:id", (request, response) => {
     const { id } = request.params
     const { titulo } = request.body
 
-    const updateCommand = `
+    const updateCommand = 
         UPDATE filmes_JoaoReis
         SET titulo = ?
         WHERE id = ?
-    `
+    
 
     database.query(
         updateCommand,
