@@ -55,6 +55,33 @@ app.post("/create-list", (request, response) => {
     )
 })
 
+app.put("/edit-filme/:id", (request, response) => {
+    const { id } = request.params
+    const { titulo } = request.body
+
+    const updateCommand = `
+        UPDATE filmes_JoaoReis
+        SET titulo = ?
+        WHERE id = ?
+    `
+
+    database.query(
+        updateCommand,
+        [titulo, id],
+        (error) => {
+            if (error) {
+                console.log(error)
+                return response.status(500).json(error)
+            }
+
+            response.json({
+                message: "Nome do filme editado com sucesso!"
+            })
+        }
+    )
+})
+
+
 app.delete("/delete-list/:id", (request, response) => {
     const { id } = request.params
 
