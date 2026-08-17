@@ -1,9 +1,11 @@
 import express from "express"
 import mysql2 from "mysql2"
+import cors from "cors"
 
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 const database = mysql2.createPool({
     host: "benserverplex.ddns.net",
@@ -33,11 +35,11 @@ app.post("/create-list", (request, response) => {
         classificacao_etaria
     } = request.body
 
-    const insertCommand = 
+    const insertCommand = `
         INSERT INTO filmes_JoaoReis
         (titulo, genero, duracao, classificacao_etaria)
         VALUES (?, ?, ?, ?)
-    
+    `
 
     database.query(
         insertCommand,
@@ -57,30 +59,25 @@ app.post("/create-list", (request, response) => {
 
 app.put("/edit-filme/:id", (request, response) => {
     const { id } = request.params
-    const { titulo } = request.body
+    const { titulo, genero, duracao, classificacao_etaria } = request.body
 
-    const updateCommand = 
+    const updateCommand = `
         UPDATE filmes_JoaoReis
-        SET titulo = ?
+        SET titulo = ?, genero = ?, duracao = ?, classificacao_etaria = ?
         WHERE id = ?
-    
+    `
 
-    database.query(
-        updateCommand,
-        [titulo, id],
-        (error) => {
-            if (error) {
-                console.log(error)
-                return response.status(500).json(error)
-            }
-
-            response.json({
-                message: "Nome do filme editado com sucesso!"
-            })
+    database.query(updateCommand, [titulo, genero, duracao, classificacao_etaria, id], (error) => {
+        if (error) {
+            console.log(error)
+            return response.status(500).json(error)
         }
-    )
+        
+        response.json({
+            message: "Filme editado com sucesso!"
+        })
+    })
 })
-
 
 app.delete("/delete-list/:id", (request, response) => {
     const { id } = request.params
