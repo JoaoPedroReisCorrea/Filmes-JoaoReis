@@ -72,7 +72,7 @@ app.put("/edit-filme/:id", (request, response) => {
             console.log(error)
             return response.status(500).json(error)
         }
-        
+
         response.json({
             message: "Filme editado com sucesso!"
         })
