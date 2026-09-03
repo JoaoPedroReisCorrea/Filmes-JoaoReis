@@ -1,4 +1,4 @@
-GET http://localhost:8080/all-filmes
+GET http://localhost:8080/
 
 ###
 

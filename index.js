@@ -14,7 +14,7 @@ const database = mysql2.createPool({
     database: "alunos_filmes_03MA"
 })
 
-app.get("/all-filmes", (request, response) => {
+app.get("/", (request, response) => {
     const selectCommand = "SELECT * FROM filmes_JoaoReis"
 
     database.query(selectCommand, (error, data) => {
