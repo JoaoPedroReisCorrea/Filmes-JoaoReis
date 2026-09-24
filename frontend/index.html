@@ -1,18 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Frontend</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Filmes</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Lista de Filmes</h1>
+  <main class="wrap">
+    <div class="masthead">
+      <div>
+        <h1>Catálogo de filmes</h1>
+        <p class="subtitle">registro do acervo</p>
+      </div>
+      <a class="btn btn-primary" href="cadastro.html">Registrar filme</a>
+    </div>
 
-    <section class="filmes"></section>
+    <p class="tally" id="tally"></p>
 
-    <script src="script.js"></script>
+    <ul class="catalog" id="catalog"></ul>
 
+    <div class="state" id="empty" hidden>
+      <strong>O acervo está vazio</strong>
+      Nenhum filme foi registrado ainda.
+    </div>
+
+    <div class="state" id="loading">
+      <strong>Carregando</strong>
+      Consultando o catálogo…
+    </div>
+
+    <div class="banner" id="banner"></div>
+  </main>
+
+  <script src="api.js"></script>
+  <script src="listagem.js"></script>
 </body>
 </html>
-
